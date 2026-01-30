@@ -5,7 +5,14 @@ require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-app.use(cors("https://social-app-five-gules.vercel.app"));
+// app.use(cors("https://social-app-five-gules.vercel.app"));
+
+app.use(cors({
+  origin: "https://social-app-five-gules.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
