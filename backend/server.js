@@ -18,13 +18,9 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Root route - health check
+// Root route - redirects to signup
 app.get("/", (req, res) => {
-  res.json({
-    message: "API is running",
-    status: "active",
-    timestamp: new Date().toISOString(),
-  });
+  res.redirect("/signup");
 });
 
 // Health check endpoint for Render
