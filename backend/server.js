@@ -2,23 +2,28 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
+const path= require ("path");
 const app = express();
 const PORT = process.env.PORT || 5000;
-
+const _dirname = path.resolve();
 // CORS configuration
 app.use(
   cors({
-    origin:
-      process.env.FRONTEND_URL || "https://social-app-five-gules.vercel.app",
+    origin: [
+      "http://localhost:3000",
+      "https://social-app-five-gules.vercel.app"
+    ],
     credentials: true,
   })
 );
 
+
+// app.use(cors(corsoptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Root route
-app.get("/", (req, res) => {
+app.get("/auth", (req, res) => {
    res.json({
         activeStatus: true,
         error: false,
@@ -50,6 +55,11 @@ app.use((err, req, res, next) => {
   console.error("Error:", err);
   res.status(500).json({ msg: "Internal server error" });
 });
+
+// app.use(express.static(path.join(_dirname,"/frontend/build")))
+// app.get('/*', (req,res) =>{
+//   res.sendFile(path.resolve(_dirname, "frontend", "build", "index.html"));
+// });
 
 // Connect to MongoDB
 if (process.env.MONGO_URI) {
