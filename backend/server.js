@@ -5,17 +5,17 @@ require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-app.use(cors("https://social-app-five-gules.vercel.app/login"));
+app.use(cors("https://social-app-five-gules.vercel.app"));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
-app.use('/',(req,res)=>{
-  res.send({
-    activeStatus:true,
-    error:false,
-  })
-})
-app.use("/api/login", require("./routes/auth.js"));
+// app.use('/',(req,res)=>{
+//   res.send({
+//     activeStatus:true,
+//     error:false,
+//   })
+// })
+app.use("/api/", require("./routes/auth.js"));
 app.use("/api/posts", require("./routes/post.js"));
 
 mongoose
