@@ -2,15 +2,14 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
-
+const path = require(path);
 const app = express();
 const PORT = process.env.PORT || 5000;
 // app.use(cors("https://social-app-five-gules.vercel.app"));
-
+dotenv.config();
 app.use(cors({
   origin: "https://social-app-five-gules.vercel.app",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"]
+  credentials: true,
 }));
 
 app.use(express.json());
@@ -26,7 +25,7 @@ app.get("/", (req, res) => {
   res.send("API is running");
 });
 
-app.use("/api/", require("./routes/auth.js"));
+app.use("/api/auth", require("./routes/auth.js"));
 app.use("/api/posts", require("./routes/post.js"));
 
 mongoose
