@@ -10,7 +10,7 @@ export default function CreatePost({ onCreated }) {
       alert("Add text or image");
       return;
     }
-    await API.post("/api/posts", { text, imageUrl });
+    await API.post("/posts", { text, imageUrl });
     setText("");
     setImageUrl("");
     onCreated();

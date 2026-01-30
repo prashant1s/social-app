@@ -2,14 +2,14 @@ import API from "../api";
 
 export default function PostCard({ post, refresh }) {
   const like = async () => {
-    await API.post(`/api/posts/${post._id}/like`);
+    await API.post(`/posts/${post._id}/like`);
     refresh();
   };
 
   const comment = async () => {
     const text = prompt("Comment:");
     if (!text) return;
-    await API.post(`/api/posts/${post._id}/comment`, { text });
+    await API.post(`/posts/${post._id}/comment`, { text });
     refresh();
   };
 

@@ -7,7 +7,7 @@ export default function Feed() {
   const [posts, setPosts] = useState([]);
 
   const loadPosts = async () => {
-    const res = await API.get("/posts");
+    const res = await API.get("/api/posts");
     setPosts(res.data);
   };
 
@@ -17,7 +17,7 @@ export default function Feed() {
 
   const logout = () => {
     localStorage.removeItem("token");
-    window.location = "/login";
+    window.location = "/api/login";
   };
 
   return (
