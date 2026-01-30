@@ -1,0 +1,48 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #a9cbff;
+}
+
+.center, .container {
+  max-width: 500px;
+  margin: auto;
+  padding: 30px;
+}
+
+.app-wrapper {
+  width: 50%;
+  max-width: 800px;
+  min-width: 300px;
+  margin: 20px auto;
+}
+
+
+input, textarea {
+  width: 100%;
+  margin: 5px 0;
+  padding: 10px;
+}
+
+button {
+  padding: 10px;
+  margin-top: 5px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 10px;
+}
+
+img {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
