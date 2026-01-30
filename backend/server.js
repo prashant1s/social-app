@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Root route
-app.get("/auth", (req, res) => {
+app.get("/", (req, res) => {
    res.json({
         activeStatus: true,
         error: false,
