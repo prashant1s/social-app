@@ -6,7 +6,7 @@ const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 5000;
 // app.use(cors("https://social-app-five-gules.vercel.app"));
-dotenv.config();
+
 app.use(cors({
   origin: "https://social-app-five-gules.vercel.app",
   credentials: true,
