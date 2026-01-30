@@ -32,6 +32,21 @@ app.get("/health", (req, res) => {
   });
 });
 
+// Signup endpoint info (for direct browser access)
+app.get("/signup", (req, res) => {
+  res.json({
+    message: "Signup endpoint",
+    endpoint: "/api/auth/signup",
+    method: "POST",
+    body: {
+      username: "string (required)",
+      email: "string (required)",
+      password: "string (required)",
+    },
+    note: "Use POST method to create an account",
+  });
+});
+
 // API routes
 app.use("/api/auth", require("./routes/auth.js"));
 app.use("/api/posts", require("./routes/post.js"));
