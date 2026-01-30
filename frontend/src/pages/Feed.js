@@ -7,7 +7,7 @@ export default function Feed() {
   const [posts, setPosts] = useState([]);
 
   const loadPosts = async () => {
-    const res = await API.get("/auth/posts");
+    const res = await API.get("/posts");
     setPosts(res.data);
   };
 
