@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-app.use("/api", require("./routes/auth.js"));
+app.use("/api/login", require("./routes/auth.js"));
 app.use("/api/posts", require("./routes/post.js"));
 
 mongoose
