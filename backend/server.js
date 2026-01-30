@@ -22,6 +22,10 @@ app.use(express.urlencoded({extended:true}));
 //     error:false,
 //   })
 // })
+app.get("/", (req, res) => {
+  res.send("API is running");
+});
+
 app.use("/api/", require("./routes/auth.js"));
 app.use("/api/posts", require("./routes/post.js"));
 
