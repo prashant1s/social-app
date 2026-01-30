@@ -7,7 +7,7 @@ export default function Signup() {
   const [password, setPassword] = useState("");
 
   const signup = async () => {
-    await API.post("/signup", { username, email, password });
+    await API.post("/auth/signup", { username, email, password });
     alert("Account created. Login now.");
     window.location = "/login";
   };
