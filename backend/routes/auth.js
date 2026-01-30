@@ -5,38 +5,60 @@ const User = require("../models/User");
 
 // signup
 router.post("/signup", async (req, res) => {
-  const { username, email, password } = req.body;
+  try {
+    const { username, email, password } = req.body;
 
-  const existing = await User.findOne({ email });
-  if (existing) return res.status(400).json({ msg: "Email exists" });
+    if (!username || !email || !password) {
+      return res.status(400).json({ msg: "All fields are required" });
+    }
 
-  const hash = await bcrypt.hash(password, 10);
+    const existing = await User.findOne({ email });
+    if (existing) return res.status(400).json({ msg: "Email exists" });
 
-  const user = await User.create({
-    username,
-    email,
-    passwordHash: hash
-  });
+    const hash = await bcrypt.hash(password, 10);
 
-  res.json({ msg: "User created" });
+    const user = await User.create({
+      username,
+      email,
+      passwordHash: hash
+    });
+
+    res.json({ msg: "User created" });
+  } catch (error) {
+    console.error("Signup error:", error);
+    res.status(500).json({ msg: "Server error" });
+  }
 });
 
 // login
 router.post("/login", async (req, res) => {
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
-  const user = await User.findOne({ email });
-  if (!user) return res.status(400).json({ msg: "Invalid credentials" });
+    if (!email || !password) {
+      return res.status(400).json({ msg: "Email and password are required" });
+    }
 
-  const ok = await bcrypt.compare(password, user.passwordHash);
-  if (!ok) return res.status(400).json({ msg: "Invalid credentials" });
+    const user = await User.findOne({ email });
+    if (!user) return res.status(400).json({ msg: "Invalid credentials" });
 
-  const token = jwt.sign(
-    { id: user._id, username: user.username },
-    process.env.JWT_SECRET
-  );
+    const ok = await bcrypt.compare(password, user.passwordHash);
+    if (!ok) return res.status(400).json({ msg: "Invalid credentials" });
 
-  res.json({ token, username: user.username });
+    if (!process.env.JWT_SECRET) {
+      return res.status(500).json({ msg: "Server configuration error" });
+    }
+
+    const token = jwt.sign(
+      { id: user._id, username: user.username },
+      process.env.JWT_SECRET
+    );
+
+    res.json({ token, username: user.username });
+  } catch (error) {
+    console.error("Login error:", error);
+    res.status(500).json({ msg: "Server error" });
+  }
 });
 
 module.exports = router;
